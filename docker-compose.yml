@@ -1,6 +1,12 @@
 version: '3.8'
-
 services:
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
   backend:
     build: ./backend
     volumes:
@@ -11,6 +17,9 @@ services:
       - "8080:8080"
     environment:
       - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - MONGODB_URI=mongodb://mongodb:27017/chatgpt-assistant
+    depends_on:
+      - mongodb
     restart: unless-stopped
 
   frontend:
@@ -19,7 +28,7 @@ services:
       dockerfile: Dockerfile.dev  # We'll create this file for development below.
     volumes:
       - ./frontend:/app            # Mount your local 'frontend' directory into /app in the container.
-      - /app/node_modules          # Ensure node_modules inside container aren’t overwritten.
+      - /app/node_modules          # Ensure node_modules inside container aren't overwritten.
     ports:
       - "5173:5173"               # Vite dev server defaults to port 5173.
     environment:
@@ -27,3 +36,6 @@ services:
     depends_on:
       - backend
     restart: unless-stopped
+
+volumes:
+  mongodb_data:

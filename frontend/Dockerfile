@@ -1,12 +1,12 @@
 # Stage 1: Build the React app
-FROM node:18-alpine AS builder
+FROM node:16
 WORKDIR /app
 
 # Install dependencies and build
-COPY package*.json ./
+COPY package.json package-lock.json ./
 RUN npm install
 COPY . .
-RUN npm run build
+RUN npm run dev
 
 # Stage 2: Serve the build with Nginx
 FROM nginx:stable-alpine

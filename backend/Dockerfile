@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy package.json and package-lock.json first (for better caching)
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies with explicit mongoose installation
+RUN npm install && npm install mongoose
 
 # Install nodemon globally
 RUN npm install -g nodemon

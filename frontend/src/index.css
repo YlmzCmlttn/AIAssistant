@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Base styles */
+html, body {
+  @apply h-full m-0 p-0;
+}
+
+body {
+  @apply antialiased text-gray-900 bg-white;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full hover:bg-gray-400 transition-colors;
+}
+
+/* Button styles */
+button {
+  @apply select-none;
+}
+
+/* Form styles */
+textarea {
+  @apply block w-full;
+}
+
+/* You can add any custom CSS here if needed */ 
